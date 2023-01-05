@@ -22,4 +22,5 @@ for i in range(len(quest)):
     else:
         score += point_i[reponse_u - 1]
         print(f"réponse correcte vous avez gagnez {point_i[reponse_u-1]} points")
+
 print(f"votre score est {score} sur {score_maximal} ")
