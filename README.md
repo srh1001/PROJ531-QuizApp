@@ -1,1 +1,1 @@
-# PROJ531-Projet
+# PROJ531-QuizApp
