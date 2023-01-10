@@ -1,4 +1,5 @@
 import getpass
+import json
 from profile import *
 
 all_profiles = {}
@@ -11,5 +12,5 @@ def create_account():
         pw = getpass.getpass("Choose your password : ")
         all_profiles[pseudo] = Profile(name = pseudo, pw = pw)
     else:
-        print("Username already taken.")
+        print("Username unavailable.")
 

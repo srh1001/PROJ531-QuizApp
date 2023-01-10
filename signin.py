@@ -17,10 +17,39 @@ def sign_in():
             else:
                 print("Incorrect password.")
     else:
-        print("No account was found.")
-        page_connection()
+        return None
+
+def sign_out():
+    print("Deconnexion réussie")
+
+def home_page(profile):
+
+    current_user.get_stats()
+
+    if profile.get_status() == "admin":
+        choose_or_create_quiz()
+        
+    else:
+        q = choose_quiz()
+        all_quizzes[q].launch_quiz()
+    
+    home_page(profile)
+
+
 
 def choose_or_create_quiz():
+    p = input("Create a quiz -a  |  Choose an existant quiz -b")
+    if p == "b":
+        choose_quiz()
+    elif p == "a":
+        path = input("File directory : ")
+        quiz_name = input("Quiz name : ")
+        create_quiz_file(path)
+        print("Quiz", all_quizzes[quiz_name], "created")
+        choose_or_create_quiz()
+    else:
+        print("Incorrect input")
+        choose_or_create_quiz()
 
 
 def choose_quiz():
@@ -32,17 +61,21 @@ while True:
     p = page_connection()
     if p == "a":
         current_user = sign_in()
-        # current_user.get_stats()
-        if current_user.get_status() == "admin":
-            # create_quiz()
-            
+        if current_user == None :
+            f"No account was found."
         else:
-        # q = choose_quiz()
-        # all_quizzes[q].launch_quiz()
-        break
+            current_user.show_stats()
+
+            if current_user.get_status() == "admin":
+                choose_or_create_quiz()
+                
+            else:
+                q = choose_quiz()
+                all_quizzes[q].launch_quiz()
+
 
     elif p == "b": 
         f"Create your account : "
         create_account()
     else: 
-        break
+         break
