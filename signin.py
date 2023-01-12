@@ -85,6 +85,7 @@ while True:
                     if q in all_quizzes:
                         score = all_quizzes[q].launch_quiz()
                         current_user.set_score(q, score)
+                        print()
                     else:
                         print("Incorrect input")
 
