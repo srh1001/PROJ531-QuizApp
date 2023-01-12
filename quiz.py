@@ -62,7 +62,7 @@ class Quiz():
 
 def create_quiz_file(fichier: str):
     '''
-    creation d un quiz a partir d un fichier txt
+    creation d une quiz a partir d un fichier
     '''
     global all_quizzes
     file = open(fichier, "r")
