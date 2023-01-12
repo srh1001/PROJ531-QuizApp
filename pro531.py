@@ -1,5 +1,5 @@
 all_quizzes = {}
-
+import time
 class Quiz():
     def __init__(self, name: str, questions: list, reponses: list[list], reponses_c: list[int], point: list[int]):
         self.name = name
@@ -29,21 +29,33 @@ class Quiz():
             return f"{h} heures {m} minutes {s} secondes"
 
     def launch_quiz(self):
+        t1=time.time()
         score = 0
         score_maximal = 0
         print(self.name)
         for i in range(len(self.quest)):
+            print()
             print(f"Question {i+1} :", self.quest[i])
             for j in range(len(self.rep[i])):
                 print(f"{j+1}) {self.rep[i][j]}", end=' ')
             print()
-            reponse_u = int(input("choisir le numéro de votre réponse "))
-            if (reponse_u -1) == self.rep_c[i]:
+            while True:
+                try:
+                    reponse_u=int(input("choisir le numéro de votre réponse"))
+                except:
+                    print("saisir un nombre valide")
+                else:
+                    if reponse_u>len(self.rep[i]) or reponse_u<=0:
+                        print("saisir un nombre valide")
+                    else:
+                        break
+            if (reponse_u) == self.rep_c[i]:
                 score += self.point[i]
                 print(f"Bonne réponse, vous avez gagné {self.point[i]} points ")
             else:
-                print(f"Mauvaise réponse , la réponse est {self.rep[int(self.rep_c[i])-1][j]}")
+                print(f"Mauvaise réponse , la réponse est {self.rep[i][int(self.rep_c[i])-1]}")
             score_maximal += self.point[i]
+        t2=time.time()
         print(f"Quiz terminé , votre score est {score}/{score_maximal} en {self.calculate_time(t1,t2)}")
         return score
 
@@ -69,7 +81,7 @@ def create_quiz_file(fichier: str):
         p.append(t[1])
     
     all_quizzes[titre] = Quiz(titre, question, rep, rep_c, p)
-    return all_quizzes
+    return Quiz(titre, question, rep, rep_c, p)
 
 
 def create_quiz():
@@ -78,7 +90,13 @@ def create_quiz():
     '''
     global all_quizzes
     titre = input("Proposez un titre du quiz : ")
-    n = int(input("Proposez le nombre de questions pour le quizz "))
+    while True:
+        try:
+            n = int(input("Proposez le nombre de questions pour le quizz "))
+        except:
+            print("veuillez saisir un nombre")
+        else:
+            break
     questions = []
     reponses = []
     rep_c = []
@@ -86,13 +104,25 @@ def create_quiz():
     for i in range(n):
         questions.append(input(f"Saisissez la question n°{i+1} "))
         reponses.append(input("saisissez les réponses séparés par ; ").split(";"))
-        rep_c.append(int(input("saisir le numéro de la réponse correcte "))-1)
-        point.append(int(input("saisir le score ")))
+        while True:
+            try:
+                rep_c.append(int(input("saisir le numéro de la réponse correcte ")) - 1)
+            except:
+                print("veuillez saisir un nombre")
+            else:
+                break
+        while True:
+            try:
+                point.append(int(input("saisir le score ")))
+            except:
+                print("veuillez saisir un nombre")
+            else:
+                break
         print()
     
     all_quizzes[titre] = Quiz(titre, questions, reponses, rep_c, point)
-    for j in range (n):
-        time.sleep
-    return all_quizzes
+    return Quiz(titre, questions, reponses, rep_c, point)
 
-create_quiz()
+q=create_quiz_file('test.txt')
+q.launch_quiz()
+
