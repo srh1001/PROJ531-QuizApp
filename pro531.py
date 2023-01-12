@@ -21,13 +21,13 @@ class Quiz():
                 print(f"{j+1}) {self.rep[i][j]}", end=' ')
             print()
             reponse_u = int(input("choisir le numéro de votre réponse "))
-            if reponse_u == self.rep_c[i]:
+            if (reponse_u -1) == self.rep_c[i]:
                 score += self.point[i]
                 print(f"Bonne réponse, vous avez gagné {self.point[i]} points ")
             else:
-                f"Mauvaise réponse , la réponse est {self.rep[int(self.rep_c[i])-1][j]}"
+                print(f"Mauvaise réponse , la réponse est {self.rep[int(self.rep_c[i])-1][j]}")
             score_maximal += self.point[i]
-        f"Quiz terminé , votre score est {score}/{score_maximal}"
+        print(f"Quiz terminé , votre score est {score}/{score_maximal}")
         return score
 
 
@@ -69,7 +69,7 @@ def create_quiz():
     for i in range(n):
         questions.append(input(f"Saisissez la question n°{i+1} "))
         reponses.append(input("saisissez les réponses séparés par ; ").split(";"))
-        rep_c.append(input("saisir le numéro de la réponse correcte "))
+        rep_c.append(int(input("saisir le numéro de la réponse correcte "))-1)
         point.append(int(input("saisir le score ")))
         print()
     
@@ -77,4 +77,3 @@ def create_quiz():
     return all_quizzes
 
 create_quiz()
-all_quizzes["quiztest"].launch_quiz()

@@ -43,18 +43,27 @@ def choose_or_create_quiz():
     if p == "b":
         choose_quiz()
     elif p == "a":
-        path = input("File directory : ")
-        quiz_name = input("Quiz name : ")
-        create_quiz_file(path)
-        print("Quiz", all_quizzes[quiz_name], "created")
-        choose_or_create_quiz()
+        p = input("Import a file -a  |  Create with python -b")
+        if p == "a":
+            path = input("File directory : ")
+            quiz_name = input("Quiz name : ")
+            create_quiz_file(path)
+            print("Quiz", all_quizzes[quiz_name], "created")
+        elif p == "b":
+            create_quiz()
+        else:
+         print("Incorrect input")
+         choose_or_create_quiz()           
     else:
         print("Incorrect input")
         choose_or_create_quiz()
 
 
 def choose_quiz():
-    print(all_quizzes)
+    print("Quizzes currently available : ")
+    for e in all_quizzes:
+        print(e)
+    print()
     return input("What quiz do you want to do ? : ")
 
 
@@ -65,15 +74,19 @@ while True:
         if current_user == None :
             f"No account was found."
         else:
-            current_user.show_stats()
+            while True :
+                current_user.show_stats()
 
-            if current_user.get_status() == "admin":
-                choose_or_create_quiz()
-                
-            else:
-                q = choose_quiz()
-                score = all_quizzes[q].launch_quiz()
-                current_user.set_score(q, score)
+                if current_user.get_status() == "admin":
+                    choose_or_create_quiz()
+                    
+                else:
+                    q = choose_quiz()
+                    if q in all_quizzes:
+                        score = all_quizzes[q].launch_quiz()
+                        current_user.set_score(q, score)
+                    else:
+                        print("Incorrect input")
 
 
     elif p == "b": 

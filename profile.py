@@ -1,6 +1,6 @@
 class Profile():
     
-    def __init__(self, name, pw=None, status = "user", liste_score = {"test":0}) :
+    def __init__(self, name, pw=None, status = "user", liste_score = {}) :
         self.name = name
         self.pw = pw
         self.status = status
@@ -12,13 +12,15 @@ class Profile():
     def get_status(self):
         return self.status
         
-    def set_score(self, quiz, score):
-         self.liste_score[quiz] = score
+    def set_score(self, quiz_name, score):
+         self.liste_score[quiz_name] = score
 
     def show_stats(self):
+        print("Your results so far : ")
         print("|  Quiz  |   Score  |")
         for k, v in self.liste_score.items():
-            f"|  {k}  |   {v}  |"
+            print(f"|  {k}  |   {v}  |")
+        print()
 
         
 
