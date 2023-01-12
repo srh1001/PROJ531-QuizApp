@@ -33,7 +33,7 @@ class Quiz():
 
 def create_quiz_file(fichier: str):
     '''
-    creation d une quiz a partir d un fichier
+    creation d un quiz a partir d un fichier txt
     '''
     global all_quizzes
     file = open(fichier, "r")
@@ -74,8 +74,6 @@ def create_quiz():
         print()
     
     all_quizzes[titre] = Quiz(titre, questions, reponses, rep_c, point)
-    for j in range (n):
-        time.sleep
+
     return all_quizzes
 
-create_quiz()
