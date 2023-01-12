@@ -1,6 +1,7 @@
 import getpass
 from profile import * 
 from signup import *
+from pro531 import *
 
 def page_connection():
     return input("Se connecter -a | Créer un compte -b : ")
@@ -53,7 +54,7 @@ def choose_or_create_quiz():
 
 
 def choose_quiz():
-    print(all_quizzes.keys())
+    print(all_quizzes)
     return input("What quiz do you want to do ? : ")
 
 
@@ -71,7 +72,8 @@ while True:
                 
             else:
                 q = choose_quiz()
-                all_quizzes[q].launch_quiz()
+                score = all_quizzes[q].launch_quiz()
+                current_user.set_score(q, score)
 
 
     elif p == "b": 

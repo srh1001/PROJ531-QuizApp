@@ -1,4 +1,6 @@
-class Quizz():
+all_quizzes = {}
+
+class Quiz():
     def __init__(self, name: str, questions: list, reponses: list[list], reponses_c: list[int], point: list[int]):
         self.name = name
         self.quest = questions
@@ -9,7 +11,7 @@ class Quizz():
     def __repr__(self):
         return self.name
 
-    def launch_quizz(self):
+    def launch_quiz(self):
         score = 0
         score_maximal = 0
         print(self.name)
@@ -23,16 +25,17 @@ class Quizz():
                 score += self.point[i]
                 print(f"Bonne réponse, vous avez gagné {self.point[i]} points ")
             else:
-                print(f"Mauvaise réponse , la réponse est {self.rep[self.rep_c[i]-1][j]}")
+                f"Mauvaise réponse , la réponse est {self.rep[int(self.rep_c[i])-1][j]}"
             score_maximal += self.point[i]
-        print(f"Quizz terminé , votre score est {score}/{score_maximal}")
+        f"Quiz terminé , votre score est {score}/{score_maximal}"
         return score
 
 
 def create_quiz_file(fichier: str):
     '''
-    creation d une quizz a partir d un fichier
+    creation d une quiz a partir d un fichier
     '''
+    global all_quizzes
     file = open(fichier, "r")
     lines = file.read().splitlines()
     titre = lines[0]
@@ -47,14 +50,17 @@ def create_quiz_file(fichier: str):
         t = list(map(int, tu.split(',')))
         rep_c.append(t[0])
         p.append(t[1])
-    return Quizz(titre, question, rep, rep_c, p)
+    
+    all_quizzes[titre] = Quiz(titre, question, rep, rep_c, p)
+    return all_quizzes
 
 
 def create_quiz():
     '''
      creation d une quizz par l utilisateur
     '''
-    name = input("Proposez un titre du quizz : ")
+    global all_quizzes
+    titre = input("Proposez un titre du quiz : ")
     n = int(input("Proposez le nombre de questions pour le quizz "))
     questions = []
     reponses = []
@@ -66,7 +72,9 @@ def create_quiz():
         rep_c.append(input("saisir le numéro de la réponse correcte "))
         point.append(int(input("saisir le score ")))
         print()
-    return Quizz(name, questions, reponses, rep_c, point)
+    
+    all_quizzes[titre] = Quiz(titre, questions, reponses, rep_c, point)
+    return all_quizzes
 
-
-print(create_quiz())
+create_quiz()
+all_quizzes["quiztest"].launch_quiz()
