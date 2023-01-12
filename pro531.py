@@ -57,7 +57,7 @@ def create_quiz_file(fichier: str):
 
 def create_quiz():
     '''
-     creation d une quizz par l utilisateur
+     creation d une quizz par l administrateur
     '''
     global all_quizzes
     titre = input("Proposez un titre du quiz : ")
@@ -74,6 +74,8 @@ def create_quiz():
         print()
     
     all_quizzes[titre] = Quiz(titre, questions, reponses, rep_c, point)
+    for j in range (n):
+        time.sleep
     return all_quizzes
 
 create_quiz()
