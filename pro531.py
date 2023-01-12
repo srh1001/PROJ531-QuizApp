@@ -10,6 +10,23 @@ class Quiz():
 
     def __repr__(self):
         return self.name
+    def calculate_time(self,t1,t2):
+        s=int(t2-t1)
+        h=0
+        m=0
+        if s//3600!=0:
+            h=s//3600
+            s=s%3600
+        if s%60!=0:
+            m=s//60
+            s=s%60
+        if h==0:
+            if m==0:
+                return f"{s} secondes"
+            else:
+                return f"{m} minutes {s} secondes"
+        else:
+            return f"{h} heures {m} minutes {s} secondes"
 
     def launch_quiz(self):
         score = 0
@@ -27,7 +44,7 @@ class Quiz():
             else:
                 print(f"Mauvaise réponse , la réponse est {self.rep[int(self.rep_c[i])-1][j]}")
             score_maximal += self.point[i]
-        print(f"Quiz terminé , votre score est {score}/{score_maximal}")
+        print(f"Quiz terminé , votre score est {score}/{score_maximal} en {self.calculate_time(t1,t2)}")
         return score
 
 
