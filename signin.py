@@ -44,14 +44,23 @@ def home_page(profile):
 def choose_or_create_quiz():
     p = input("Create a quiz -a  |  Choose an existant quiz -b : ")
     if p == "b":
-        choose_quiz()
+        q = choose_quiz()
+        if q in all_quizzes:
+            score = all_quizzes[q].launch_quiz()
+            current_user.set_score(q, score)
+            overwrite_profile(all_profiles)
+
+            print()
+        else:
+            print("Incorrect input")
+            
     elif p == "a":
         p = input("Import a file -a  |  Create with python -b : ")
         if p == "a":
             path = input("File directory : ")
             quiz_name = input("Quiz name : ")
             create_quiz_file(path)
-            print("Quiz", all_quizzes[quiz_name], "created")
+            #print("Quiz", all_quizzes[quiz_name], "created")
         elif p == "b":
             create_quiz()
         else:
@@ -88,6 +97,7 @@ while True:
                     if q in all_quizzes:
                         score = all_quizzes[q].launch_quiz()
                         current_user.set_score(q, score)
+                        overwrite_profile(all_profiles)
                         print()
                     else:
                         print("Incorrect input")

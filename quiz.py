@@ -41,12 +41,12 @@ class Quiz():
             print()
             while True:
                 try:
-                    reponse_u=int(input("choisir le numéro de votre réponse"))
+                    reponse_u=int(input("choisir le numéro de votre réponse : "))
                 except:
                     print("saisir un nombre valide")
                 else:
                     if reponse_u>len(self.rep[i]) or reponse_u<=0:
-                        print("saisir un nombre valide")
+                        print("saisir un nombre valide.")
                     else:
                         break
             if (reponse_u-1) == self.rep_c[i]:
@@ -58,3 +58,4 @@ class Quiz():
         t2=time.time()
         print(f"Quiz terminé , votre score est {score}/{score_maximal} en {self.calculate_time(t1,t2)}")
         return score
+

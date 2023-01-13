@@ -6,7 +6,6 @@ if os.path.exists("C:/Users/srhmr/Downloads/all_test_json/data_all_quizzes.json"
     all_quizzes = extract_json_quiz("C:/Users/srhmr/Downloads/all_test_json/data_all_quizzes.json")
 else:
     all_quizzes = {}
-print(all_quizzes)
 
 def create_quiz_file(fichier: str):
     '''
@@ -43,9 +42,9 @@ def create_quiz():
     titre = input("Proposez un titre du quiz : ")
     while True:
         try:
-            n = int(input("Proposez le nombre de questions pour le quizz "))
+            n = int(input("Proposez le nombre de questions pour le quiz : "))
         except:
-            print("veuillez saisir un nombre")
+            print("Veuillez saisir un nombre.")
         else:
             break
     questions = []
@@ -54,19 +53,19 @@ def create_quiz():
     point = []
     for i in range(n):
         questions.append(input(f"Saisissez la question n°{i+1} "))
-        reponses.append(input("saisissez les réponses séparés par ; ").split(";"))
+        reponses.append(input("saisissez les réponses séparés par un ; : ").split(";"))
         while True:
             try:
-                rep_c.append(int(input("saisir le numéro de la réponse correcte "))-1)
+                rep_c.append(int(input("saisir le numéro de la réponse correcte : "))-1)
             except:
                 print("veuillez saisir un nombre")
             else:
                 break
         while True:
             try:
-                point.append(int(input("saisir le score ")))
+                point.append(int(input("Saisir le score : ")))
             except:
-                print("veuillez saisir un nombre")
+                print("Veuillez saisir un nombre.")
             else:
                 break
         print()
@@ -77,4 +76,3 @@ def create_quiz():
 
     return quiz
 
-create_quiz_file("C:/Users/srhmr/OneDrive/Documents/USMB/Fi3/PROJ531/PROJ531-TP/PROJ531-QuizApp/admin_quiz0.txt")

@@ -45,3 +45,13 @@ def extract_json_quiz(path, all_quizzes={}):
             quiz = Quiz(*l[i].values())
             all_quizzes[quiz.name] = quiz
     return all_quizzes
+
+def overwrite_profile(_dict): 
+    l = []
+    jsonString = json.dumps(_dict)
+    jsonFile = open("data_all_profiles.json", "w")
+    jsonFile.write(jsonString)
+    jsonFile.close()
+    for obj in _dict.values():
+        p = {"name": obj.name, "pw": obj.get_pw(), "status": obj.get_status(), "liste_score": obj.liste_score}
+        l.append(p)
