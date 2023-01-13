@@ -1,5 +1,5 @@
-all_quizzes = {}
 import time
+
 class Quiz():
     def __init__(self, name: str, questions: list, reponses: list[list], reponses_c: list[int], point: list[int]):
         self.name = name
@@ -49,7 +49,7 @@ class Quiz():
                         print("saisir un nombre valide")
                     else:
                         break
-            if (reponse_u) == self.rep_c[i]:
+            if (reponse_u-1) == self.rep_c[i]:
                 score += self.point[i]
                 print(f"Bonne réponse, vous avez gagné {self.point[i]} points ")
             else:
@@ -58,71 +58,3 @@ class Quiz():
         t2=time.time()
         print(f"Quiz terminé , votre score est {score}/{score_maximal} en {self.calculate_time(t1,t2)}")
         return score
-
-
-def create_quiz_file(fichier: str):
-    '''
-    creation d une quiz a partir d un fichier
-    '''
-    global all_quizzes
-    file = open(fichier, "r")
-    lines = file.read().splitlines()
-    titre = lines[0]
-    question = lines[1].split(';')
-    rep = []
-    for k in range(2, len(lines) - 1):
-        rep.append(lines[k].split(';'))
-    point = lines[-1].split(';')
-    rep_c = []
-    p = []
-    for tu in point:
-        t = list(map(int, tu.split(',')))
-        rep_c.append(t[0])
-        p.append(t[1])
-    
-    all_quizzes[titre] = Quiz(titre, question, rep, rep_c, p)
-    return Quiz(titre, question, rep, rep_c, p)
-
-
-def create_quiz():
-    '''
-     creation d une quizz par l administrateur
-    '''
-    global all_quizzes
-    titre = input("Proposez un titre du quiz : ")
-    while True:
-        try:
-            n = int(input("Proposez le nombre de questions pour le quizz "))
-        except:
-            print("veuillez saisir un nombre")
-        else:
-            break
-    questions = []
-    reponses = []
-    rep_c = []
-    point = []
-    for i in range(n):
-        questions.append(input(f"Saisissez la question n°{i+1} "))
-        reponses.append(input("saisissez les réponses séparés par ; ").split(";"))
-        while True:
-            try:
-                rep_c.append(int(input("saisir le numéro de la réponse correcte ")) - 1)
-            except:
-                print("veuillez saisir un nombre")
-            else:
-                break
-        while True:
-            try:
-                point.append(int(input("saisir le score ")))
-            except:
-                print("veuillez saisir un nombre")
-            else:
-                break
-        print()
-    
-    all_quizzes[titre] = Quiz(titre, questions, reponses, rep_c, point)
-    return Quiz(titre, questions, reponses, rep_c, point)
-
-q=create_quiz_file('test.txt')
-q.launch_quiz()
-

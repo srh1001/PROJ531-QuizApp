@@ -3,6 +3,8 @@ from profile import *
 from signup import *
 from pro531 import *
 
+#all_quizzes = extract_json_quiz("C:/Users/srhmr/Downloads/all_test_json/data_all_quizzes.json")
+
 def page_connection():
     return input("Se connecter -a | Créer un compte -b : ")
 
@@ -18,6 +20,7 @@ def sign_in():
             else:
                 print("Incorrect password.")
     else:
+        print("No account was found")
         return None
 
 def sign_out():
@@ -39,11 +42,11 @@ def home_page(profile):
 
 
 def choose_or_create_quiz():
-    p = input("Create a quiz -a  |  Choose an existant quiz -b")
+    p = input("Create a quiz -a  |  Choose an existant quiz -b : ")
     if p == "b":
         choose_quiz()
     elif p == "a":
-        p = input("Import a file -a  |  Create with python -b")
+        p = input("Import a file -a  |  Create with python -b : ")
         if p == "a":
             path = input("File directory : ")
             quiz_name = input("Quiz name : ")
