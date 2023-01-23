@@ -1,0 +1,7 @@
+QuizS5
+cos(pi/3) = ;Dans l'approche hiérarchique, la première réceptivité du grafcet d'un Mode utilisé dans le GEMMA est : ;Un ABR est toujours équilibré. ; La puissance mécanique d'un moteur peut-elle figurer dans un tableau de Boucherot?
+1/2;1/3;1/5
+1;La variable d'un actionneur du système;La variable Xi représentant le Mode au question dans le GEMMA;La première étape de la tâche à éxécuter dans ce mode
+Vrai;Faux
+Oui;Non
+1,1 ; 3,2 ; 2,1 ; 2,2

@@ -3,11 +3,9 @@ import getpass
 from savedatajson import *
 from profile import *
 
-all_profiles = extract_json_profile("C:/Users/srhmr/Downloads/all_test_json/data_all_profiles.json")
 
-
-if os.path.exists("C:/Users/srhmr/Downloads/all_test_json/data_all_profiles.json"):
-    all_profiles = extract_json_profile("C:/Users/srhmr/Downloads/all_test_json/data_all_profiles.json")
+if os.path.exists("C:/Users/srhmr/Downloads/data_json/dataAllProfiles.json"):
+    all_profiles = extract_json_profile("C:/Users/srhmr/Downloads/data_json/dataAllProfiles.json")
 else:
     all_profiles = {}
 
@@ -24,4 +22,3 @@ def create_account():
     else:
         print("Username unavailable.")
 
-print(all_profiles)

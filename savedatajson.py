@@ -8,24 +8,24 @@ def append_to_json(_dict,path):
     with open(path, 'ab+') as f:
         f.seek(0,2)                                #Go to the end of file    
         if f.tell() == 0 :                         #Check if file is empty
-            f.write(json.dumps([_dict]).encode())  #If empty, write an array
+            f.write(json.dumps([_dict]).encode())  
         else :
             f.seek(-1,2)           
-            f.truncate()                           #Remove the last character, open the array
+            f.truncate()                           
             f.write(' , '.encode())                #Write the separator
-            f.write(json.dumps(_dict).encode())    #Dump the dictionary
-            f.write(']'.encode())                  #Close the array
+            f.write(json.dumps(_dict).encode())    
+            f.write(']'.encode())                 
     
 def profile_to_send_to_json(obj):
     #if isinstance(obj, Profile):
         profile = {"name": obj.name, "pw": obj.get_pw(), "status": obj.get_status(), "liste_score": obj.liste_score}
-        append_to_json(profile, "C:/Users/srhmr/Downloads/all_test_json/data_all_profiles.json")
+        append_to_json(profile, "C:/Users/srhmr/Downloads/data_json/dataAllProfiles.json")
 
 def quiz_to_send_to_json(obj):
 
   #  elif isinstance(obj, Quiz):
         quiz = {"name": obj.name, "questions": obj.quest, "reponses": obj.rep, "reponses_c": obj.rep_c, "point": obj.point}
-        append_to_json(quiz, "C:/Users/srhmr/Downloads/all_test_json/data_all_quizzes.json")        
+        append_to_json(quiz, "C:/Users/srhmr/Downloads/data_json/dataAllQuizzes.json")        
     
 
 # Json to obj python :       
@@ -48,10 +48,10 @@ def extract_json_quiz(path, all_quizzes={}):
 
 def overwrite_profile(_dict): 
     l = []
-    jsonString = json.dumps(_dict)
-    jsonFile = open("data_all_profiles.json", "w")
-    jsonFile.write(jsonString)
-    jsonFile.close()
     for obj in _dict.values():
         p = {"name": obj.name, "pw": obj.get_pw(), "status": obj.get_status(), "liste_score": obj.liste_score}
         l.append(p)
+    jsonString = json.dumps(l)
+    jsonFile = open("C:/Users/srhmr/Downloads/data_json/dataAllProfiles.json", "w")
+    jsonFile.write(jsonString)
+    jsonFile.close()
